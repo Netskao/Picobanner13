@@ -71,6 +71,7 @@
 				if(arg1 && arg1.length > 0 && secondaryText && secondaryText.length > 0) {
 					attrText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@: %@", arg1, secondaryText] attributes:@{ NSParagraphStyleAttributeName : style}];
 
+                    //The font can be modified. so make yourself at home
 					[attrText beginEditing];
 					[attrText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0,arg1.length)];
 					[attrText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(arg1.length, secondaryText.length+3)];
@@ -95,10 +96,6 @@
 				label.adjustsFontSizeToFitWidth = NO;
 				label.lineBreakMode = NSLineBreakByTruncatingTail;
 				label.attributedText = attrText;
-
-				// if(self.primaryLabel) {
-				// 	[self.primaryLabel setHidden:YES];
-				// }
 
 				if ([label isKindOfClass:[MarqueeLabel class]]) {
 					MarqueeLabel *view3 = (MarqueeLabel*)label;
@@ -161,7 +158,7 @@
     CGSize s = %orig;
 
     if(self.isFromBanner) {
-        s.height = 23;
+        s.height = 21;
     }
 
     return s;
@@ -237,7 +234,7 @@
 }
 
 -(double)_headerHeightForWidth:(double)arg1 {
-    return self.isFromBanner ? 23 : %orig;;
+    return self.isFromBanner ? 21 : %orig;;
 }
 
 -(double)contentBaseline {
@@ -247,20 +244,9 @@
 -(void)setFrame:(CGRect)arg1 {
 	if(self.isFromBanner) {
 		arg1.origin.x = -3.5;
-		arg1.origin.y -= 8.5;
-		// CGFloat height = arg1.size.height;
-		// CGFloat delta = (height-23)/2;
-		// arg1.origin.y -= delta;
-		arg1.size.height = 23;
-		// self.transform = CGAffineTransformMakeScale(0.5, 0.5);
+		arg1.origin.y -= 9.5;
+		arg1.size.height = 21;
 	}
-	// UIButton *button = self._iconButtons[0];
-	// if(button) {
-	// 	button.frame = CGRectMake(button.frame.origin.x, 
-	// 							  (self.bounds.size.height-button.bounds.size.height)/2, 
-	// 							  button.bounds.size.width, 
-	// 							  button.bounds.size.width);
-	// }
 	%orig;
 }
 
@@ -307,7 +293,7 @@
 +(CGRect)useableContainerViewFrameInContainerViewWithBounds:(CGRect)arg1 {
 	arg1.origin.y = -8;
 	arg1.origin.x = -4;
-	// arg1.size.width += 8;
+	arg1.size.width += 8;
 	return %orig;
 }
 %end
